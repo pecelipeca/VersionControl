@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,9 +13,18 @@ namespace week04_T4Z1QX
 {
     public partial class Form1 : Form
     {
+        List<Flat> Flats;
+
+        RealEstateEntities context = new RealEstateEntities();
         public Form1()
         {
             InitializeComponent();
+            LoadData();
+        }
+
+        void LoadData()
+        {
+            Flats = context.Flats.ToList();
         }
     }
 }
