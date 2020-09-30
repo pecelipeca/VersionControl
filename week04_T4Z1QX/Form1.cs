@@ -151,6 +151,7 @@ namespace week04_T4Z1QX
             firstColumnRange.Interior.Color = Color.LightGoldenrodYellow;
             Excel.Range lastColumnRange = xlSheet.get_Range(GetCell(2, headers.Length), GetCell(lastRowID, headers.Length));
             lastColumnRange.Interior.Color = Color.LightGreen;
+            lastColumnRange.NumberFormat= "0.##";
         }
 
     }
