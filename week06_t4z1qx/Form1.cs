@@ -22,8 +22,26 @@ namespace week06_t4z1qx
         public Form1()
         {
             InitializeComponent();
-            comboBox1.DataSource = Currencies;
-            var getCurre = new GetCurrenciesRequest();
+            //comboBox1.DataSource = Currencies;
+            var mnbService = new MNBArfolyamServiceSoapClient();
+            var request = new GetCurrenciesRequestBody();
+            var response = mnbService.GetCurrencies(request);
+            var result = response.GetCurrenciesResult;
+
+            var xml = new XmlDocument();
+            xml.LoadXml(result);
+            /*foreach (XmlElement x in xml.DocumentElement)
+            {
+                string currency;
+                
+
+                var childElement = (XmlElement)x.ChildNodes[0];
+                if (childElement == null)
+                    continue;
+                Currencies.Add(currency);
+            }*/
+
+
             RefreshDate();
         }
 
