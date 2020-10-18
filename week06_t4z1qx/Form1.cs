@@ -16,40 +16,50 @@ namespace week06_t4z1qx
 {
     public partial class Form1 : Form
     {
+
+        RichTextBox rtb1 = new RichTextBox();
+        RichTextBox rtb2 = new RichTextBox();
         BindingList<RateData> Rates = new BindingList<RateData>();
-        BindingList<string> Currencies = new BindingList<string>();
+        BindingList<currs> Currencies = new BindingList<currs>();
+        public class currs
+        {
+            public string curr2 { get; set; }
+        }
         
         public Form1()
         {
             InitializeComponent();
-            //comboBox1.DataSource = Currencies;
-            var mnbService = new MNBArfolyamServiceSoapClient();
-            var request = new GetCurrenciesRequestBody();
-            var response = mnbService.GetCurrencies(request);
-            var result = response.GetCurrenciesResult;
-
-            var xml = new XmlDocument();
-            xml.LoadXml(result);
-            /*foreach (XmlElement x in xml.DocumentElement)
-            {
-                string currency;
-                
-
-                var childElement = (XmlElement)x.ChildNodes[0];
-                if (childElement == null)
-                    continue;
-                Currencies.Add(currency);
-            }*/
-
-
+            dataGridView1.DataSource = Rates;
+            GetCurrencies();
+            comboBox1.DataSource = Currencies;
             RefreshDate();
         }
 
-
-        public void RefreshDate()
+        private void GetCurrencies()
         {
 
-            Rates.Clear();
+            var mnbService = new MNBArfolyamServiceSoapClient();
+            var request = new GetCurrenciesRequestBody();
+            var response = mnbService.GetCurrencies(request);
+            var result2 = response.GetCurrenciesResult;
+
+            var xml = new XmlDocument();
+            xml.LoadXml(result2);
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+                var curr = new currs();
+
+
+
+                curr.curr2 = element.GetAttribute("curr");
+                Currencies.Add(curr);
+
+            }
+            rtb2.Text = Currencies.ToString();
+        }
+
+        void GetExhangeRate()
+        {
             var mnbService = new MNBArfolyamServiceSoapClient();
 
             var request = new GetExchangeRatesRequestBody()
@@ -63,50 +73,57 @@ namespace week06_t4z1qx
 
             var result = response.GetExchangeRatesResult;
 
-            dataGridView1.DataSource = Rates;
+            rtb1.Text = result;
+        }
 
-            void xmlLoad()
+        void xmlLoad()
+        {
+            var xml = new XmlDocument();
+            xml.LoadXml(rtb1.Text.ToString());
+            foreach (XmlElement x in xml.DocumentElement)
             {
-                var xml = new XmlDocument();
-                xml.LoadXml(result);
-                foreach (XmlElement x in xml.DocumentElement)
-                {
-                    var rate = new RateData();
-                    Rates.Add(rate);
+                var rate = new RateData();
+                Rates.Add(rate);
 
-                    rate.Date = DateTime.Parse(x.GetAttribute("date"));
+                rate.Date = DateTime.Parse(x.GetAttribute("date"));
 
-                    var childElement = (XmlElement)x.ChildNodes[0];
-                    rate.Currency = childElement.GetAttribute("curr");
-
-                    var unit = decimal.Parse(childElement.GetAttribute("unit"));
-                    var value = decimal.Parse(childElement.InnerText);
-                    if (unit != 0)
-                        rate.Value = value / unit;
-                }
-
+                var childElement = (XmlElement)x.ChildNodes[0];
+                rate.Currency = childElement.GetAttribute("curr");
+                if (childElement == null)
+                    continue;
+                var unit = decimal.Parse(childElement.GetAttribute("unit"));
+                var value = decimal.Parse(childElement.InnerText);
+                if (unit != 0)
+                    rate.Value = value / unit;
             }
+
+        }
+
+        void chartLoad()
+        {
+            chartRateData.DataSource = Rates;
+
+            var series = chartRateData.Series[0];
+            series.ChartType = SeriesChartType.Line;
+            series.XValueMember = "Date";
+            series.YValueMembers = "Value";
+            series.BorderWidth = 2;
+
+            var legend = chartRateData.Legends[0];
+            legend.Enabled = false;
+
+            var chartArea = chartRateData.ChartAreas[0];
+            chartArea.AxisX.MajorGrid.Enabled = false;
+            chartArea.AxisY.MajorGrid.Enabled = false;
+            chartArea.AxisY.IsStartedFromZero = false;
+        }
+
+        public void RefreshDate()
+        {
+
+            Rates.Clear();
+            GetExhangeRate();
             xmlLoad();
-
-            void chartLoad()
-            {
-                chartRateData.DataSource = Rates;
-
-                var series = chartRateData.Series[0];
-                series.ChartType = SeriesChartType.Line;
-                series.XValueMember = "Date";
-                series.YValueMembers = "Value";
-                series.BorderWidth = 2;
-
-                var legend = chartRateData.Legends[0];
-                legend.Enabled = false;
-
-                var chartArea = chartRateData.ChartAreas[0];
-                chartArea.AxisX.MajorGrid.Enabled = false;
-                chartArea.AxisY.MajorGrid.Enabled = false;
-                chartArea.AxisY.IsStartedFromZero = false;
-            }
-
             chartLoad();
 
         }
