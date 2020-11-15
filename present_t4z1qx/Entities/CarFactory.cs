@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace present_t4z1qx.Entities
 {
-    public class BallFactory : IToyFactory
+    public class CarFactory : IToyFactory
     {
         public Toy CreateNew()
         {
-            return new Ball();
+            return new Car();
         }
 
         Toy IToyFactory.CreateNew()
