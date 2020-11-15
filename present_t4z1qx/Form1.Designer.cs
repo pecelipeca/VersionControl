@@ -35,7 +35,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.lblNext = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.BallColor = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.RibbonColor = new System.Windows.Forms.Button();
+            this.BoxColor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -80,28 +83,61 @@
             // lblNext
             // 
             this.lblNext.AutoSize = true;
-            this.lblNext.Location = new System.Drawing.Point(276, 35);
+            this.lblNext.Location = new System.Drawing.Point(364, 35);
             this.lblNext.Name = "lblNext";
             this.lblNext.Size = new System.Drawing.Size(68, 13);
             this.lblNext.TabIndex = 2;
             this.lblNext.Text = "Coming next:";
             // 
-            // button3
+            // BallColor
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.button3.Location = new System.Drawing.Point(12, 30);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.BallColor.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BallColor.Location = new System.Drawing.Point(179, 59);
+            this.BallColor.Name = "BallColor";
+            this.BallColor.Size = new System.Drawing.Size(75, 23);
+            this.BallColor.TabIndex = 3;
+            this.BallColor.UseVisualStyleBackColor = false;
+            this.BallColor.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(260, 30);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "PRESENT";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // RibbonColor
+            // 
+            this.RibbonColor.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.RibbonColor.Location = new System.Drawing.Point(260, 59);
+            this.RibbonColor.Name = "RibbonColor";
+            this.RibbonColor.Size = new System.Drawing.Size(75, 23);
+            this.RibbonColor.TabIndex = 5;
+            this.RibbonColor.UseVisualStyleBackColor = false;
+            this.RibbonColor.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // BoxColor
+            // 
+            this.BoxColor.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BoxColor.Location = new System.Drawing.Point(260, 88);
+            this.BoxColor.Name = "BoxColor";
+            this.BoxColor.Size = new System.Drawing.Size(75, 23);
+            this.BoxColor.TabIndex = 6;
+            this.BoxColor.UseVisualStyleBackColor = false;
+            this.BoxColor.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.BoxColor);
+            this.Controls.Add(this.RibbonColor);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.BallColor);
             this.Controls.Add(this.lblNext);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.button2);
@@ -121,7 +157,10 @@
         private System.Windows.Forms.Label lblNext;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button BallColor;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button RibbonColor;
+        private System.Windows.Forms.Button BoxColor;
     }
 }
 

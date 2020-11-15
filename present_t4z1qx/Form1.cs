@@ -72,7 +72,16 @@ namespace present_t4z1qx
         {
             Factory = new BallFactory()
             {
-                BallColor = button3.BackColor
+                BallColor = BallColor.BackColor
+            };
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                ribbon_color = RibbonColor.BackColor,
+                box_color = BoxColor.BackColor
             };
         }
 
@@ -96,5 +105,7 @@ namespace present_t4z1qx
                 return;
             button.BackColor = colorPicker.Color;
         }
+
+      
     }
 }
