@@ -14,9 +14,5 @@ namespace present_t4z1qx.Entities
             return new Car();
         }
 
-        Toy IToyFactory.CreateNew()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
