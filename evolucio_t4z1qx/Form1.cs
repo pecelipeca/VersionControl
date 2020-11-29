@@ -35,6 +35,11 @@ namespace evolucio_t4z1qx
             }
             gc.Start();
 
+            var playerList = from p in gc.GetCurrentPlayers()
+                             orderby p.GetFitness() descending
+                             select p;
+            var topPerformers = playerList.Take(populationSize / 2).ToList();
+
         }
 
         private void Gc_GameOver(object sender)
@@ -45,9 +50,6 @@ namespace evolucio_t4z1qx
                 generation);
         }
 
-        var playerList = from p in gc.GetCurrentPlayers()
-                         orderby p.GetFitness() descending
-                         select p;
-        var topPerformers = playerList.Take(populationSize / 2).ToList();
+
     }
 }
