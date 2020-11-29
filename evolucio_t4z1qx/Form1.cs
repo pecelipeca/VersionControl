@@ -23,6 +23,11 @@ namespace evolucio_t4z1qx
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
 
+            gc.AddPlayer();
+            gc.Start(true);
+
         }
+
+
     }
 }
